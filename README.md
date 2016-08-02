@@ -1,2 +1,2 @@
 # sduff.github.io
-Personal Web Site
+My Personal Web Site, http://simonduff.net
