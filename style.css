@@ -33,6 +33,10 @@ p {
 	padding-bottom: 1em;
 }
 
+ul {
+	list-style-type: circle;
+}
+
 #content {
 	padding: 0;
 	text-align: justify;
