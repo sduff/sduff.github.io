@@ -188,6 +188,7 @@ code {
 	#headshot {
 		border-radius:1em;
 		margin: auto;
+		clear: both;
 		display: block;
 		float: none;
 	}
