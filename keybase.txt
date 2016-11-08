@@ -1,0 +1,70 @@
+
+
+==================================================================
+https://keybase.io/sduff
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://simonduff.net
+  * I am sduff (https://keybase.io/sduff) on keybase.
+  * I have a public key with fingerprint AF46 80FD 273B CEE0 FDEE  56B9 D2A5 9C26 9D71 78FB
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010107f740fd08b3fcf368aee57ded0b0c964536c318a9a30d8245765585b95676d70a",
+            "fingerprint": "af4680fd273bcee0fdee56b9d2a59c269d7178fb",
+            "host": "keybase.io",
+            "key_id": "d2a59c269d7178fb",
+            "kid": "010107f740fd08b3fcf368aee57ded0b0c964536c318a9a30d8245765585b95676d70a",
+            "uid": "820a81b3dd6c489c04bfeb9db7b1ae19",
+            "username": "sduff"
+        },
+        "service": {
+            "hostname": "simonduff.net",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1478574354,
+    "expire_in": 157680000,
+    "prev": "c1a2d607e26426b7f71484e444a1e00cf400b023e32c2b6fbf757d2400385556",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.58
+Comment: https://keybase.io/crypto
+
+yMIlAnicrVJbSBVBGD6nstIKIzBJU3C7IGKHvczu7B4hEMTCqBAjC6RzdnZmdTu6
+e9yzHvMSUZLSBSSU7moXNEgqogSRoAs9lGY3ogs+VGCYVoJGF1O0Wam3Hpt5mJl/
+vu+b7/+Y+0vmeuK878/HZDWGAuu8fXebKzw70rKX1TDIwlWMv4YJkdmFlGIScQIh
+AzN+huXohDoErI5ZGQm6pguSrBIiQkwwi1hNkYAoSJrAyaqiCiyWeSBCSRRlESmi
+BCUMWZXJZHTDLCZ22DZMh8qqOpBkKslDAWmE0B1VlJCCeVVUNF5SMOSgrCNKLLEi
+LoOaQ2qE+AyL1ughMGvvH/j/7LtiVk7mWVXmkICxpAFZ0ViAdELtIog4lXCKC4wQ
+21TLCEVHcIWuM3szGVqKGhpxU3Xb+HttlFmmC/GZxKHMsG05lmaV0qsSxwn7XaZT
+FXahlQQF/ogEkGFiGiIlRIkdMSyT8XMUqTmGq8oBKIsQCCLIZMiesGGTgOEiaE8y
+S4f7DIlSSY1TeSyxkPAS4CVEM+KADAgAQOUIy2o6YGk8vEAEXuORpCMd0sx4WhVk
+URQlxm2r3LQYv0htqsWzDRWbqlNhE2bvvTtF8zzeOM/8mDnu5/LExS79++XQogXT
+63fnRIee5m7OOR5OyRg+GTbGWpZv8+RP1Y/fFFsbpsc6e0e3X8jtCbUWjLbtKzm5
+9eCjVYtqGfV56sj2Z+kTrRngxYmv9Ym3S2/M/XjZLqp5l9OTV3fv3MXUT6PN8dci
+ykCemfA2X154NH1S6r06OJh0pC49N7GjezBhdVt8qCE1ef/p2qZX/eMzja3+7ukn
+cKR700D1isTKW2t+VR2QwYGZJlj9YZe/a6V3vW/DusOrunS0tuT70I9DWVPJwf78
+luxT5YVbLhW+iO3E3ATOHv72s/azr+eNcHbn44cvx6986V9rLBke3/cgmHD92MPX
+aWfGOicXB5M72vtSghuTYEH7nd8iTEDR
+=YqUI
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/sduff
+
+==================================================================
