@@ -1,1 +1,60 @@
+
+# SEO settings
 title: Simon Duff
+description: "Simon Duff - Big Data Expert"
+keywords: "Simon Duff, sduff, Big Data, AI, Machine Learning, Splunk"
+url: http://simonduff.net
+#baseurl: "/simplest"
+baseurl: null
+
+google_analytics: UA-400224-5
+repo: http://github.com/sduff/sduff.github.io
+disqus_shortname: "simonduff-net"
+
+# Build settings
+permalink   : /:title/
+markdown    : kramdown
+highlighter : pygments
+
+#paginate: 4
+#paginate_path: "/page/:num/"
+comments: true
+
+#source: source
+#destination: _site
+
+# Sass configuration
+sass:
+  sass_dir: assets/scss
+  style: compressed # expanded
+
+# Author settings
+author:
+  name     : Simon Duff
+  job      : Big Data Expert
+  bio      : "Big Data Expert"
+  thumb    : /images/simon_duff_headshot.jpg
+  email    : simon.duff@gmail.com
+  url      : http://nandomoreira.me
+  github   : http://github.com/sduff
+  twitter  : http://twitter.com/sduff
+  facebook : http://facebook.com/simonduff
+  linkedin : http://linkedin.com/in/sduff
+
+# social settings
+#og_locale: "pt_BR"
+twitter_card: "summary_large_image"
+twitter_site: "@sduff"
+
+gems:
+  - bourbon
+  - jekyll-paginate
+
+# navbar pages
+navbar:
+  - slug : about
+    title: About
+  - slug : blog
+    title: Blog
+
+exclude: ["gulp", "node_modules", "bower", "bower_components", "config.rb", "src", "Gemfile", "Gemfile.lock", ".rvmrc", ".rbenv-version", "package.json", "gulpfile.js", "README.md", "Rakefile", "changelog.md"]
