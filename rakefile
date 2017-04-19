@@ -14,7 +14,7 @@ end
 desc "Build and check the site"
 task :build do
 	sh "bundle exec jekyll build"
-	HTMLProofer.check_directory("./site").run
+	HTMLProofer.check_directory("./site",{:verbose => true}).run
 end
 
 desc "Run Markdown lint"

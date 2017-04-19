@@ -1,3 +1,3 @@
-# SimonDuff.net
+# simonduff.net
 
-Sources for my website, http://simonduff.net
+My website sources, http://simonduff.net
