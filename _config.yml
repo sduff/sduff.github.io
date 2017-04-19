@@ -48,7 +48,7 @@ twitter_card: "summary_large_image"
 twitter_site: "@sduff"
 
 gems:
-  - bourbon
+  #  - bourbon # sduff: now included inline
   - jekyll-paginate
 
 # navbar pages
