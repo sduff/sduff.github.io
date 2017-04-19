@@ -9,7 +9,8 @@ env:
 
 notifications:
   email:
-    - simonduff.net@gmail.com
+    recipients:
+      - simonduff.net@gmail.com
     on_success: always
     on_failure: always
 
