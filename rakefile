@@ -1,10 +1,20 @@
-task :default => ["post_build"]
+require 'rake'
+require 'html-proofer'
 
-desc "Run all post-build tasks"
-task :post_build do
+task :default => ["all"]
+
+desc "All"
+task :all do
 	Rake::Task["markdown_lint"].invoke
+	Rake::Task["build"].invoke
 	Rake::Task["ping_google"].invoke
 	Rake::Task["ping_bing"].invoke
+end
+
+desc "Build and check the site"
+task :build do
+	sh "bundle exec jekyll build"
+	HTMLProofer.check_directory("./site").run
 end
 
 desc "Run Markdown lint"
