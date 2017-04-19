@@ -1,0 +1,26 @@
+task :default => ["post_build"]
+
+desc "Run all post-build tasks"
+task :post_build do
+	Rake::Task["markdown_lint"].invoke
+	Rake::Task["ping_google"].invoke
+	Rake::Task["ping_bing"].invoke
+end
+
+desc "Run Markdown lint"
+task :markdown_lint do
+	puts "Running Markdown Lint"
+	sh "bundle exec mdl ./"
+end
+
+desc "Ping google for sitemap update"
+task :ping_google do
+	puts "Ping Google Sitemaps"
+	"curl https://www.google.com/webmasters/tools/ping?sitemap=http%3A%2F%2Fsimonduff.net%2Fsitemap.xml"
+end
+
+desc "Ping Bing for sitemap update"
+task :ping_bing do
+	puts "Ping Bing Sitemaps"
+	"curl http://www.bing.com/ping?sitemap=http%3A%2F%2Fsimonduff.net%2Fsitemap.xml"
+end
