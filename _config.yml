@@ -35,11 +35,12 @@ author:
   bio      : "I drink and I know things"
   thumb    : /images/simon_duff_headshot.jpg
   email    : simon.duff@gmail.com
-  url      : http://nandomoreira.me
+  url      : http://simonduff.net
   github   : http://github.com/sduff
   twitter  : http://twitter.com/sduff
   facebook : http://facebook.com/simonduff
   linkedin : http://linkedin.com/in/sduff
+  aboutme  : http://about.me/simon.duff
 
 # social settings
 #og_locale: "pt_BR"
