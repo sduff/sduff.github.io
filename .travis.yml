@@ -6,3 +6,16 @@ script: bundle exec rake
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+
+notifications:
+  email:
+    - simonduff.net@gmail.com
+    on_success: always
+    on_failure: always
+
+  webhooks:
+    urls:
+      - https://www.google.com/webmasters/tools/ping?sitemap=http%3A%2F%2Fsimonduff.net%2Fsitemap.xml
+      - http://www.bing.com/ping?sitemap=http%3A%2F%2Fsimonduff.net%2Fsitemap.xml
+    on_success: always
+    on_failure: never
