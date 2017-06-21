@@ -28,6 +28,14 @@ alerts. The whole framework allows easy integration of
 
 They also have the [best T-shirts](https://www.co-store.com/splunk).
 
+## Splunk-related pages on this site
+<ul>
+{% assign docs = site:docs | reverse docs %}
+{% for page in docs %}{% if page.tags contains "splunk" and page.url != "/splunk"  %}
+<li><a href="{{page.url}}">{{page.title}}</a></li>
+{% endif %}{% endfor %}
+</ul>
+
 ## Splunk Web Resources
 * [Splunk Homepage](http://splunk.com) -- Splunk Homepage
 * [Splunk Answers](https://answers.splunk.com/index.html) -- Questions and Answers!
