@@ -7,6 +7,17 @@
 	<link rel="stylesheet" type="text/css" href="/reset.css">
 	<link rel="stylesheet" type="text/css" href="/style.css">
 	<link rel="stylesheet" type="text/css" href="/pygment.css">
+  <meta content="{{ site.title }}" property="og:site_name">
+  <meta content="{{ site.title }}" property="og:title">
+	<meta content="website" property="og:type">
+	<meta content="{{ site.description }}" property="og:description">
+	<meta content="{{ site.url }}{{ page.url }}" property="og:url">
+  <meta content="{{ site.time | date_to_xmlschema }}" property="article:published_time">
+  <meta content="{{ site.url }}/about/" property="article:author">
+	<meta content="{{ site.url }}/simon_duff_headshot.png" property="og:image">
+	{% assign tags =  site.docs| map: 'tags' | join: ','  | split: ',' | uniq | sort %}
+	{% for tag in tags %}  <meta content="{{ tag }}" property="article:tag">
+	{% endfor %}
   <script type="text/javascript" src="/jquery-1.8.2.min.js"></script>
 </head>
 <body>
@@ -17,7 +28,7 @@
 	<div id="content">
 
 <div class="tagcloud">
-	<h3 id="tagline">Select multiple tags to filter the post listing</h3>
+	<h3 id="tagline">Select a tag to filter the post listing</h3>
 {% assign tags =  site.docs| map: 'tags' | join: ','  | split: ',' | uniq | sort %}
 <ul>
 {% for tag in tags %}
@@ -49,12 +60,13 @@
 <script type="text/javascript">
 $(".tag_select").off("click").on("click", function(e) {
   var clicked_tag = $(this);
-  if (!clicked_tag.hasClass("selected_tag")) {
-		$(this).addClass("selected_tag");
+	if (clicked_tag.hasClass("selected_tag")) {
+		$(".tag_select").removeClass("selected_tag");
 	} else {
-		$(this).removeClass("selected_tag");
+		$(".tag_select").removeClass("selected_tag");
+		$(this).addClass("selected_tag");
 	}
-	
+
   var selected_tags = $(".selected_tag");
 	var classes="";
 	for (var i=0; i<selected_tags.length; i++) {
@@ -62,15 +74,15 @@ $(".tag_select").off("click").on("click", function(e) {
 	}
 	console.log(classes);
 	if (classes) {
-		$(".result:not("+classes+")").fadeOut();
-		$(".result"+classes).fadeIn();
+		$(".result:not("+classes+")").fadeOut("slow", function(){});
+		$(".result"+classes).fadeIn("slow",function(){});
 	} else {
-		$(".result").fadeIn();
+		$(".result").fadeIn("slow",function(){});
 	}
 	var total = $(".result").length;
 	var visible = $(".result"+classes).length;
 
-	var msg = "Select multiple tags to filter the post listing &mdash; "; 
+	var msg = "Select a tag to filter the post listing &mdash; "; 
 	if (classes) {
 		msg = msg + visible+" of " + total +" pages match";
 	} else {

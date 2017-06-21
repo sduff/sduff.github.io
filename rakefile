@@ -20,7 +20,7 @@ end
 desc "Run Markdown lint"
 task :markdown_lint do
 	puts "Running Markdown Lint"
-	sh "bundle exec mdl ./"
+	sh "bundle exec mdl ./_docs"
 end
 
 desc "Ping google for sitemap update"
