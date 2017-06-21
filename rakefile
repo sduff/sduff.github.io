@@ -5,7 +5,7 @@ task :default => ["all"]
 
 desc "All"
 task :all do
-	Rake::Task["markdown_lint"].invoke
+#	Rake::Task["markdown_lint"].invoke
 	Rake::Task["build"].invoke
 	Rake::Task["ping_google"].invoke
 	Rake::Task["ping_bing"].invoke

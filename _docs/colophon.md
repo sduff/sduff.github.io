@@ -18,8 +18,7 @@ site at [http://github.com/sduff/sduff.github.io](http://github.com/sduff/sduff.
 Previously, I had written a custom site generator, called *waste*, but found I was
 spending more time working on it then I did writing content for the site.
 I abandonded it, but the [waste sources](http://github.com/sduff/waste) are
-available, 
-should you wish to see some hacked-together python code.
+available, should you wish to see some hacked-together python code.
 
 ## Build
 
@@ -51,8 +50,8 @@ value from my writing.
 
 This site may have some affiliate links, which means that when you click on a
 link that I suggest, it may result in a commission for me. I'll only link to
-items I actually use or support, and the possibility of a commission doesn't sway my
-opinion of the product.
+items I actually use or support, and the possibility of a commission doesn't
+sway my opinion of the product.
 
 Seriously, we're probably talking a few cents here.
 

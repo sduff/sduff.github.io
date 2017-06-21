@@ -34,4 +34,4 @@ You can find Simon elsewhere on the web:
 * [Google+](https://plus.google.com/+SimonDuff) *rarely used*
 * [Twitter](http://twitter.com/sduff) *rarely used*
 
-Simon is done talking in the third person 😉 
+Simon is done talking in the third person 😉
