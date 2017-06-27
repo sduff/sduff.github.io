@@ -2,7 +2,7 @@
 title: Now Page for Simon Duff
 layout: default
 title: Now
-date: 2017-06-07
+date: 2017-06-27
 tags: [personal]
 ---
 
@@ -13,19 +13,17 @@ Last Updated: {{ page.date | date_to_long_string }}
 
 ## Location
 
-I'm currently in Cyberjaya, Malaysia, engaged on a week long project with
-a large multinational.
+I'm currently in Singapore, engaged on a multi-month government project.
 
 ## Current Focus
 
-After a (quite busy) 2 week vacation, I feel refreshed and inspired. I am aiming
-to revamp this website and get into the mindset of publishing some content on
-a weekly basis.
+I fell behind with trying to publish something on this site on a weekly basis,
+but I hope to return to a regular routine with this long engagement and the kids
+returning to school.
 
-My kids are all on school holiday for the next month, and I should also be at
-home, so we will be planning activities and outings, hopefully that I'll be
-availble for. I'm also sure that little man is planning on taking his first
-steps soon.
+I am working on several Splunk apps I hope to release shortly. I have returned
+to playing go on the [Online Go Server](https://online-go.com/player/451425/)
+and trying to develop a basic game with [Phaser](http://phaser.io).
 
 *This page inspired by [nownownow](http://nownownow.com).*
 {: style="text-align: center"}

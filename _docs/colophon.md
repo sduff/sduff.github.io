@@ -15,9 +15,9 @@ This website it hosted on [GitHub Pages](http://pages.github.com) , which
 integrates Jekyll, a static site generator.  You can find the source for the
 site at [http://github.com/sduff/sduff.github.io](http://github.com/sduff/sduff.github.io).
 
-Previously, I had written a custom site generator, called *waste*, but found I was
-spending more time working on it then I did writing content for the site.
-I abandonded it, but the [waste sources](http://github.com/sduff/waste) are
+Previously, I had written a custom site generator, called *WASTE*, but found I was
+spending more time working on it than I did writing content for the site.
+I abandonded it, but the [WASTE sources](http://github.com/sduff/waste) are
 available, should you wish to see some hacked-together python code.
 
 ## Build
@@ -33,7 +33,7 @@ also include an icon on this page showing the build status.
 
 ### Sitemap pings
 
-[waste](http://github.com/sduff/waste), my homemade site generator, could
+[WASTE](http://github.com/sduff/waste), my homemade site generator, could
 automically ping Google and Microsoft Bing to alert them that a new version of
 the site was available. There are actually several locations where we can hook
 into the GitHub and Travis build process to perform the same tasks. These
@@ -58,4 +58,13 @@ Seriously, we're probably talking a few cents here.
 ## Disclaimer
 
 The postings on this site are my own and do not represent the 
-position or opinions of Splunk Inc., or its affiliates.
+position or opinions of my employer or its affiliates.
+
+All data and information provided on this site is for informational purposes
+only. I make no representations as to accuracy, completeness, currentness,
+suitability, or validity of any information on this site and will not be liable
+for any errors, omissions, or delays in this information or any losses,
+injuries, or damages arising from its display or use. All information is
+provided on an as-is basis.
+
+

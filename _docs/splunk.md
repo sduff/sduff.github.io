@@ -8,9 +8,9 @@ layout: default
 # Splunk
 
 I've been using Splunk for almost 10 years. I first introduced to Splunk as
-a Security tool while I was at a major Australian bank. So impressed with the
-product, I joined the company, and have been a Professional Services consultant
-with them ever since.
+a Security tool while I was working at a major Australian bank. So impressed
+with the product, I joined the company, and have been a Professional Services
+consultant with them ever since.
 
 ## What the Splunk?
 
@@ -26,7 +26,7 @@ alerts. The whole framework allows easy integration of
 [custom visualisations](http://docs.splunk.com/Documentation/Splunk/latest/AdvancedDev/CustomVizDevOverview) and 
 [automated responses](https://www.splunk.com/en_us/solutions/solution-areas/security-and-fraud/adaptive-response-initiative.html).
 
-They also have the [best T-shirts](https://www.co-store.com/splunk).
+We also have the [best T-shirts](https://www.co-store.com/splunk) 😉 
 
 ## Splunk-related pages on this site
 <ul>
@@ -43,4 +43,10 @@ They also have the [best T-shirts](https://www.co-store.com/splunk).
 * [/r/Splunk](http://reddit.com/r/splunk) -- Splunk's home on reddit
 * [GoSplunk](http://gosplunk.com/) -- Popular Splunk Queries
 * [Big Book Of Splunk](http://www.bbosearch.com/) -- Even more Splunk Queries
+* [Splunk Sizing Calculator](https://splunk-sizing.appspot.com/) -- Splunk Sizing Calculator for `indexes.conf`
 
+## Splunk Blogs
+* [Splunk Blogs](https://www.splunk.com/blog/) -- Official Splunk Blog Posts
+* [Ryan Faircloth](http://www.rfaircloth.com/)
+* [Anthony Tellez](http://anthonygtellez.github.io/)
+* [Duane Waddle](http://www.duanewaddle.com/)
