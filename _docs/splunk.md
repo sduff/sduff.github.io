@@ -7,8 +7,8 @@ layout: default
 
 # Splunk
 
-I've been using Splunk for almost 10 years. I first introduced to Splunk as
-a Security tool while I was working at a major Australian bank. So impressed
+I've been using Splunk for almost 10 years, after first being introduced to it
+as a Security tool while I was working at a major Australian bank. So impressed
 with the product, I joined the company, and have been a Professional Services
 consultant with them ever since.
 
@@ -45,8 +45,9 @@ We also have the [best T-shirts](https://www.co-store.com/splunk) 😉
 * [Big Book Of Splunk](http://www.bbosearch.com/) -- Even more Splunk Queries
 * [Splunk Sizing Calculator](https://splunk-sizing.appspot.com/) -- Splunk Sizing Calculator for `indexes.conf`
 
-## Splunk Blogs
+## Splunk Blogs & Repositories
 * [Splunk Blogs](https://www.splunk.com/blog/) -- Official Splunk Blog Posts
 * [Ryan Faircloth](http://www.rfaircloth.com/)
 * [Anthony Tellez](http://anthonygtellez.github.io/)
 * [Duane Waddle](http://www.duanewaddle.com/)
+* [Vladimir's GitHub](https://github.com/hire-vladimir/)
