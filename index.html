@@ -25,7 +25,7 @@
 <p>You found it!
 </p>
 
-<h5 id="tagline">Select a tag to filter the post listing</h3>
+<h5 id="tagline">Select a tag to filter the post listing</h5>
 {% assign tags =  site.docs| map: 'tags' | join: ','  | split: ',' | uniq | sort %}
 <ul id="tags">
 {% for tag in tags %}<li id="{{tag}}" class="tag_select"><a href="#">{{tag}}</a></li>{% endfor %}
