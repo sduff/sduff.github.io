@@ -4,9 +4,8 @@
 <html>
 	<title>Simon Duff</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="/reset.css">
-	<link rel="stylesheet" type="text/css" href="/style.css">
-	<link rel="stylesheet" type="text/css" href="/pygment.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:900|Work+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
   <meta content="{{ site.title }}" property="og:site_name">
   <meta content="{{ site.title }}" property="og:title">
 	<meta content="website" property="og:type">
@@ -21,22 +20,17 @@
   <script type="text/javascript" src="/jquery-1.8.2.min.js"></script>
 </head>
 <body>
-<div id="container">
-	<div id="header">
-		<h1><a href="/">Simon Duff</a></h1>
-	</div>
-	<div id="content">
+<h1>Simon Duff</h1>
 
-<div class="tagcloud">
-	<h3 id="tagline">Select a tag to filter the post listing</h3>
+<p>You found it!
+</p>
+
+<h5 id="tagline">Select a tag to filter the post listing</h3>
 {% assign tags =  site.docs| map: 'tags' | join: ','  | split: ',' | uniq | sort %}
-<ul>
-{% for tag in tags %}
-<li id="{{tag}}" class="tag_select"><a href="#">{{tag}}</a></li>
-{% endfor %}
+<ul id="tags">
+{% for tag in tags %}<li id="{{tag}}" class="tag_select"><a href="#">{{tag}}</a></li>{% endfor %}
 </ul>
-</div>
-<div id="results">
+
 {% assign docs = site:docs | reverse docs %}
 {% for page in docs %}
 <div id="{{page.url}}" class="result {% for tag in page.tags %}{{ tag }} {% endfor %}">
@@ -44,19 +38,7 @@
 	<span class="date">{{page.date | date: "%d %B %Y" }}</span>
 </div>
 {% endfor %}
-</div>
-	</div>
-	<div id="footer">
-		<img src="/simon_duff_headshot.png" alt="Simon Duff headshot" />
-		<p>
-		<b>Simon Duff</b> is an experienced big-data practitioner, working with several of the
-	world's largest enterprises to provide solutions to a variety of use-cases. With
-	his background of artificial intelligence, computer security and nearly a decade
-	as an university educator, Simon is well placed to deliver creative solutions
-	while also up-skilling his clients.
-		</p>
-	</div>
-</div>
+
 <script type="text/javascript">
 $(".tag_select").off("click").on("click", function(e) {
   var clicked_tag = $(this);
@@ -72,7 +54,6 @@ $(".tag_select").off("click").on("click", function(e) {
 	for (var i=0; i<selected_tags.length; i++) {
 		classes += "."+selected_tags[i].id;
 	}
-	console.log(classes);
 	if (classes) {
 		$(".result:not("+classes+")").fadeOut("slow", function(){});
 		$(".result"+classes).fadeIn("slow",function(){});
