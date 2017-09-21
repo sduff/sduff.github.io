@@ -3,58 +3,21 @@ layout: compress
 ---
 <!DOCTYPE html>
 <html>
-	<title>{{ page.title }}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="/reset.css">
-	<link rel="stylesheet" type="text/css" href="/style.css">
-	<link rel="stylesheet" type="text/css" href="/pygment.css">
-	<meta content="{{ site.title }}" property="og:site_name">
-{% if page.title %}	<meta content="{{ page.title }}" property="og:title">{% else %}	<meta content="{{ site.title }}" property="og:title">{% endif %}
-{% if page.title %} <meta content="article" property="og:type"> {% else %} <meta content="website" property="og:type"> {% endif %}
-{% if page.description %} <meta content="{{ page.description }}" property="og:description"> {% else %} <meta content="{{ site.description }}" property="og:description"> {% endif %}
-{% if page.url %} <meta content="{{ site.url }}{{ page.url }}" property="og:url"> {% endif %}
-{% if page.date %} <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time">
-  <meta content="{{ site.url }}/about/" property="article:author"> {% endif %}
-{% if page.image %} <meta content="{{ site.url }}/{{ page.image }}" property="og:image"> {% else %} <meta content="{{ site.url }}/simon_duff_headshot.png" property="og:image"> {% endif %}
-{% if page.tags%}
-  {% for tag in page.tags limit:1 %}
-  <meta content="{{ tag }}" property="article:section">
-  {% endfor %}
-{% endif %}
-{% if page.tags %}
-  {% for tag in page.tags %}
-  <meta content="{{ tag }}" property="article:tag">
-  {% endfor %}
-{% endif %}	
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:900|Work+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="{{site.baseurl}}/css/main.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/pygment.css">
 </head>
-<body>
-<div id="container">
-	<div id="header">
-		<h1><a href="/">Simon Duff</a></h1>
-	</div>
-	<div id="content">
-	{{ content }}
-	</div>
-	<div id="footer">
-		<img src="/simon_duff_headshot.png" alt="Simon Duff headshot" />
-		<p>
-		<b>Simon Duff</b> is an experienced big-data practitioner, working with several of the
-	world's largest enterprises to provide solutions to a variety of use-cases. With
-	his background of artificial intelligence, computer security and nearly a decade
-	as an university educator, Simon is well placed to deliver creative solutions
-	while also up-skilling his clients.
-		</p>
-	</div>
-</div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-400224-5', 'auto');
-  ga('send', 'pageview');
-
-</script>
+<body style="background-color: rgb(255, 255, 255)">
+  {{ content }}
+<footer>
+    <div class="links">
+        <a href="{{site.baseurl}}/">Home</a>
+        <a href="{{site.baseurl}}/about/">About</a>
+    </div>
+</footer>
 </body>
 </html>

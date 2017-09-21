@@ -13,3 +13,6 @@ collections:
     output: true
     layout: default
     permalink: /:path
+
+sass:
+	style: compressed

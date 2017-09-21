@@ -1,7 +1,7 @@
 ---
 layout: default
 tags: [ website ]
-date: 2017-06-09
+date: 2017-09-21
 ---
 
 # Colophon
@@ -17,14 +17,25 @@ site at [http://github.com/sduff/sduff.github.io](http://github.com/sduff/sduff.
 
 Previously, I had written a custom site generator, called *WASTE*, but found I was
 spending more time working on it than I did writing content for the site.
-I abandonded it, but the [WASTE sources](http://github.com/sduff/waste) are
+I abandoned it, but the [WASTE sources](http://github.com/sduff/waste) are
 available, should you wish to see some hacked-together python code.
+
+## Theme
+
+I've modified an existing Jekyll theme called
+[Hagura](https://github.com/sharu725/hagura) as I wasn't happy with the
+readability of my homemade CSS.
+
+For code highlighting, I [forked](https://github.com/sduff/lucario) a popular
+text editor theme called [Lucario](https://github.com/raphamorim/lucario). This
+is the same theme I use for my [vimrc and
+terminal](https://github.com/sduff/dotfiles).
 
 ## Build
 
 One particular aspect of this website is its connection to [Travis-CI](https://travis-ci.org/),
 a continuous integration system. When I push new content to GitHub, Travis will
-automatically attempt to bulid the site and verify any URLs are present and
+automatically attempt to build the site and verify any URLs are present and
 correct. I'll be emailed the results of the build, on success or failure. I can
 also include an icon on this page showing the build status.
 
@@ -34,7 +45,7 @@ also include an icon on this page showing the build status.
 ### Sitemap pings
 
 [WASTE](http://github.com/sduff/waste), my homemade site generator, could
-automically ping Google and Microsoft Bing to alert them that a new version of
+atomically ping Google and Microsoft Bing to alert them that a new version of
 the site was available. There are actually several locations where we can hook
 into the GitHub and Travis build process to perform the same tasks. These
 mechanisms will be documented at a later stage.

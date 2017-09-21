@@ -37,7 +37,7 @@ usually to open this file and iterate over the results.
 The following template should be placed in the `$SPLUNK_HOME/bin/scripts/`
 directory.
 
-```
+```python
 import gzip
 import csv
 
@@ -71,3 +71,4 @@ Splunk also initiated the [Adaptive Response Initiative](https://www.splunk.com/
 * Firewall Rules (*isolate a compromised machine*)
 * IOT devices (*think physical traffic lights, flags and sirens*)
 * Enrichment (*Google a search query, write the results to a file which is indexed by Splunk*)
+* Expect script (*ssh to a server and restart a hung process*)
