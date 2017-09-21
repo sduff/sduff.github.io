@@ -15,4 +15,4 @@ collections:
     permalink: /:path
 
 sass:
-	style: compressed
+  style: compressed
