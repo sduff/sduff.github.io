@@ -149,7 +149,7 @@ footer {
 }
 
 #tags li {
-	display: inline;
+	display: inline-block;
 	border-radius: 3px;
     &:hover {
         background: lighten($brand-color, 10%);
@@ -160,6 +160,7 @@ footer {
 #tags a {
     color: $text-color;
     text-decoration: none;
+		border: 0;
 }
 
 .tag_select {
