@@ -55,7 +55,7 @@ for row in csv.DictReader(openany(results)):
 This command can then be selected as a `Trigger Action` when saving or modifying
 an alert.
 
-![Splunk save as alert](/splunk_alert_action.png "Splunk save as alert")
+![Splunk save as alert](/img/splunk_alert_action.png "Splunk save as alert")
 
 ## Advanced Alert Actions
 

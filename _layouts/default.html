@@ -9,7 +9,7 @@ layout: compress
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:900%7CWork+Sans" rel="stylesheet">
   <link rel="stylesheet" href="{{site.url}}/css/main.css">
-  <link rel="stylesheet" href="{{site.url}}/pygment.css">
+  <link rel="stylesheet" href="{{site.url}}/css/pygment.css">
   <meta content="{{ site.title }}" property="og:site_name">
 {% if page.title %}  <meta content="{{ page.title }}" property="og:title">{% else %}  <meta content="{{ site.title }}" property="og:title">{% endif %}
 {% if page.title %}  <meta content="article" property="og:type"> {% else %}  <meta content="website" property="og:type"> {% endif %}
@@ -17,7 +17,7 @@ layout: compress
 {% if page.url %}  <meta content="{{ site.url }}/{{ page.url }}" property="og:url">{% endif %}
 {% if page.date %}  <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time">
   <meta content="{{ site.url }}/about/" property="article:author"> {% endif %}
-{% if page.image %}  <meta content="{{ site.url }}/{{ page.image }}" property="og:image"> {% else %}  <meta content="{{ site.url }}/simon_duff_headshot.png" property="og:image"> {% endif %}
+{% if page.image %}  <meta content="{{ site.url }}/{{ page.image }}" property="og:image"> {% else %}  <meta content="{{ site.url }}/img/simon_duff_headshot.png" property="og:image"> {% endif %}
 {% if page.tags%}
 {% for tag in page.tags limit:1 %}
   <meta content="{{ tag }}" property="article:section">

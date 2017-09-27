@@ -10,7 +10,7 @@ layout: default
 The [Splunk](/splunk) time range picker is a convinient widget for selecting froma
 variety of different timeframes for a search. 
 
-![Default Splunk time range picker](/splunk_time_range_picker_default.png "Default Splunk time range picker")
+![Default Splunk time range picker](/img/splunk_time_range_picker_default.png "Default Splunk time range picker")
 
 There are several ways that this timepicker can be customised, but they are
 rather heavy-handed, in that they affect the whole app or system to which they
@@ -67,7 +67,7 @@ The benefit of this approach is that entire sections can be hidden, and this
 restriction can be done on a per-dashboard level, rather than at a per-app
 level.
 
-![Restricted Splunk time range picker](/splunk_time_range_picker_restricted.png "Restricted Splunk time range picker")
+![Restricted Splunk time range picker](/img/splunk_time_range_picker_restricted.png "Restricted Splunk time range picker")
 
 The downsides are that this is only works for custom dashboards and forms, and
 that these presets are just  masked -- a crafty user could disable this CSS and
