@@ -1,13 +1,27 @@
-layout: default
+---
+title: Monty Hall Problem simulated in Python
+date: 2017-10-01
+tags: [python, probability]
+published: false
 ---
 
-# Monty Hall
+# Monty Hall Problem siulated in Python
 
-Monty Hall is a long standing
+In light of the recent news that [Monty Hall has passed
+away](http://www.reuters.com/article/us-people-montyhall/lets-make-a-deal-host-monty-hall-dead-at-96-idUSKCN1C60U0),
+I thought I would get around to posting some simulations I had written a while
+ago.
 
-## Simulation Code
+## The Monty Hall Problem
 
-```
+The [Monty Hall Problem](https://en.wikipedia.org/wiki/Monty_Hall_problem) is a
+puzzle that challenges what appears to be a 
+
+###
+
+## Python Simulation
+
+```python
 #!/usr/bin/env python
 
 import random
@@ -57,19 +71,6 @@ for d in range(3,101):
 
 ```
 
-## Results
- % |
- w |
- i | ------ switch
- n | 
- s | ------ initial
-   +-----------------
-      % doors open  
-     
+### Chart
 
-## Conclusions
-
-## Links
-
-* Monty Hall wiki
-* Other simulations
+## References
