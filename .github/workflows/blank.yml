@@ -38,7 +38,7 @@ jobs:
 
       -
         name: Run website builder
-        run:  docker run waste
+        run:  docker compose up
 
       -
         name: Deploy to GitHub Pages
