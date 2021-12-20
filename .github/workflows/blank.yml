@@ -13,29 +13,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
+        name: Checkout website builder
         uses: actions/checkout@v2
+        with:
+          repository: sduff/waste
+          path: waste
+
       -
-        name: Gen dummy page
-        run: |
-          mkdir public
-          cat > public/index.html <<EOL
-          <!doctype html>
-          <html>
-            <head>
-              <title>GitHub Pages deployed!</title>
-            </head>
-            <body>
-              <p>GitHub Pages with <strong>${{ github.sha }}</strong> commit ID has been deployed through <a href="https://github.com/marketplace/actions/github-pages">GitHub Pages action</a> successfully.</p>
-            </body>
-          </html>
-          EOL
+        name: Build website builder docker image
+        run:  |
+          cd waste
+          docker build . --file Dockerfile --tag waste
+
+      -
+        name: Cache the built image
+        uses: actions/cache@v2
+        with:
+          path: waste
+          key: ${{ github.sha }}
+
+      -
+        name: Checkout website configuration
+        uses: actions/checkout@v2
+
+      -
+        name: Run website builder
+        run:  docker run waste
+
       -
         name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
-          build_dir: public
+          build_dir: build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
