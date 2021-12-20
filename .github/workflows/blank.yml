@@ -38,7 +38,7 @@ jobs:
 
       -
         name: Run website builder
-        run:  docker run -v ./src:/src -v ./templates:/templates -v ./static:/static -v ./build:/build  waste
+        run:  docker run -v /home/runner/work/sduff.github.io/sduff.github.io/src:/src -v /home/runner/work/sduff.github.io/sduff.github.io/templates:/templates -v /home/runner/work/sduff.github.io/sduff.github.io/static:/static -v /home/runner/work/sduff.github.io/sduff.github.io/build:/build  waste
 
       -
         name: Deploy to GitHub Pages
