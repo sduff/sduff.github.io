@@ -26,13 +26,6 @@ jobs:
           docker build . --file Dockerfile --tag waste
 
       -
-        name: Cache the built image
-        uses: actions/cache@v2
-        with:
-          path: waste
-          key: ${{ github.sha }}
-
-      -
         name: Checkout website configuration
         uses: actions/checkout@v2
 
