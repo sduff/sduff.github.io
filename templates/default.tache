@@ -35,7 +35,7 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
-{{{md}}}
+{{{html}}}
 <script>hljs.highlightAll();</script>
 </body>
 </html>
