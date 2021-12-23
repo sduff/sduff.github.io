@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <link rel="icon" href="/favicon.png" />
+
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+   <!-- highlight.js code formatter -->
+   <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/nord.min.css">
+   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+   <!-- remove styled padding on pre in code -->
+   <style>
+      pre { padding: 0; }
+   </style>
+
+   <title></title>
+   <meta name="description" content="{description}">
+   <meta name="author" content="Simon Duff" />
+</head>
+<body>
+<header>
+<h1>Simon Duff</h1>
+   <nav>
+      <a href="https://newcss.net">Home</a> /
+      <a href="https://newcss.net/usage/">Usage</a> /
+      <a href="https://newcss.net/usage/elements/">Elements</a> /
+      <a href="https://newcss.net/themes/">Themes</a> /
+      <a href="https://github.com/xz/new.css">GitHub</a> / 
+      <a href="https://discord.gg/hhuuC4w">Discord</a>
+   </nav>
+</header>
+There are hundreds of static site generators https://jamstack.org/generators/ available. Enough already.
+
+However, so many developers will often be lured by the siren call to write their own custom static site generator. Its either some feature that their current SSG misses, they find it too complex to tweak an SSG to create the output they want, or they just think they can do better than what is already out there.
+
+However, it is not as straight forward as one might seem.
+
+In all honesty, writing your own static site generator is a waste of time -- hence why I dubbed my own static site generator `waste`.
+
+Countless revisions and updates, I confess I have spent more time writing and rewriting this generator than I have writing interesting articles.
+
+This article aims to address
+
+choosing a language
+libraries
+markdown
+template libs - https://wiki.python.org/moin/TemplatingA
+directory structure
+static files
+images
+templates
+parsing markdown, rendering html
+one shot, one at a time, bulk load, dependencies, only rebuild as needed
+managing metadata
+   metadata for site
+      tags, categories
+   metadata for seo, amp, twitter, etc...
+   microformats http://microformats.org/wiki/get-started
+generating paths
+themes/CSS
+https://github.com/awesome-css-group/awesome-css
+https://jamstackthemes.dev
+Or you going with a CSS framework
+level 0 - no css
+https://www.cssbed.com/
+https://github.com/dbohdan/classless-css
+water, pure?
+level 1 - css based themes
+https://github.com/robsheldon/sscaffold-css/
+https://github.com/milligram/milligram/wiki/Getting-Started
+level 2 - css and lyout
+https://picturepan2.github.io/spectre/layout/navbar.html
+https://tachyons.io/components/text/large-paragraph/index.html
+https://kbrsh.github.io/wing/
+level 3 - bootstrap, etc...
+extra features
+OK, this is why so many people are here. How do you take advantage of all the extra functionality your theme has provided you.
+Modifying the markdown parsers/render
+code hilighting
+SASS, postCSS
+generating archive pages
+   pagination
+generating sitemaps
+generating RSS
+generating amp pages
+comments?
+RSS is not dead (its merely sleeping)
+publishing?
+   hooks into gh-pages, other jamstack?
+building, packaging
+Integrating with popular devop pipelines
+pinging search engines
+
+<script>hljs.highlightAll();</script>
+</body>
+</html>
