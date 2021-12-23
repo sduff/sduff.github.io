@@ -1,3 +1,5 @@
+title: foo goo
+---
 # Hello world
 
 * one

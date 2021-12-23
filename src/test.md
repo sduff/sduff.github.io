@@ -1,3 +1,6 @@
+title: foo bar
+---
+
 # Hello world
 
 * one

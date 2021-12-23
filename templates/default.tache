@@ -1,7 +1,41 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
-{{template}}
+<head>
+   <link rel="icon" href="/favicon.png" />
 
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+   <!-- highlight.js code formatter -->
+   <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/nord.min.css">
+   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+   <!-- remove styled padding on pre in code -->
+   <style>
+      pre { padding: 0; }
+   </style>
+
+   <title>{{title}}</title>
+   <meta name="description" content="{description}">
+   <meta name="author" content="Simon Duff" />
+</head>
+<body>
+<header>
+<h1>Simon Duff</h1>
+   <nav>
+      <a href="https://newcss.net">Home</a> /
+      <a href="https://newcss.net/usage/">Usage</a> /
+      <a href="https://newcss.net/usage/elements/">Elements</a> /
+      <a href="https://newcss.net/themes/">Themes</a> /
+      <a href="https://github.com/xz/new.css">GitHub</a> / 
+      <a href="https://discord.gg/hhuuC4w">Discord</a>
+   </nav>
+</header>
 {{{md}}}
-
+<script>hljs.highlightAll();</script>
+</body>
 </html>
