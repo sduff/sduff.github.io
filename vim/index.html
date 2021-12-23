@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,54 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Enough vim to be dangerous
+date: 2017-10-09
+tags: [dotfiles]
+published: true
+layout: default</p>
+<hr />
+<h1>Enough <code>vim</code> to be dangerous</h1>
+<p>My occupation means that I'm usually working at a different customer from one
+week to the next. There is little time to configure the operating environment
+I'm working, so I have become some-what proficient at using <code>vim</code> using the
+out-of-the-boxes defaults. Different distributions may ship with a different
+set of defaults, but it is usually enough to be efficient by relying on the
+<code>vim</code> basics.</p>
+<h2><code>vim</code> tips, tricks and shortcuts</h2>
+<ul>
+{% assign docs = site:docs | reverse docs %}
+{% for page in docs %}{% if page.tags contains "vim" %}
+<li><a href="{{page.url}}">{{page.title}}</a></li>
+{% endif %}{% endfor %}
+</ul>
+<h2>My local <code>.vimrc</code></h2>
+<p>My <code>.vimrc</code> for my laptop is very minimally configured -- again, I've avoided
+the use of plugins and major customisations, lest I develop a habit or muscle
+memory relying on these.</p>
+<pre><code class="language-sh">&quot; vimrc with minimal configuration
+
+&quot; Decoration
+syntax on
+set background=dark
+colorscheme lucario
+set ruler
+set number numberwidth=4
+
+&quot; Tabbing
+set expandtab
+set shiftwidth=2 tabstop=2
+set smartindent
+
+&quot; Searching
+set ignorecase smartcase
+set incsearch
+set showmatch
+set hlsearch
+</code></pre>
+<h2>References</h2>
+<ul>
+<li><em>Coming soon</em></li>
+</ul>
 
 <script>hljs.highlightAll();</script>
 </body>

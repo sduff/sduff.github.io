@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,159 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<h1>Kafka ACLs</h1>
+<p>##Cluster Operations</p>
+<table>
+<thead>
+<tr>
+  <th>Operation</th>
+  <th>Resource</th>
+  <th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>ALTER</code></td>
+  <td><code>CLUSTER</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>ALTER_CONFIGS</code></td>
+  <td><code>CLUSTER</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>CLUSTER_ACTION</code></td>
+  <td><code>CLUSTER</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>CREATE</code></td>
+  <td><code>CLUSTER</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>DESCRIBE</code></td>
+  <td><code>CLUSTER</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>DESCRIBE_CONFIGS</code></td>
+  <td><code>CLUSTER</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>IDEMPOTENT_WRITE</code></td>
+  <td><code>CLUSTER</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Topic Operations</h2>
+<table>
+<thead>
+<tr>
+  <th>Operation</th>
+  <th>Resource</th>
+  <th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>ALTER</code></td>
+  <td><code>TOPIC</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>ALTER_CONFIGS</code></td>
+  <td><code>TOPIC</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>CREATE</code></td>
+  <td><code>TOPIC</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>DELETE</code></td>
+  <td><code>TOPIC</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>DESCRIBE</code></td>
+  <td><code>TOPIC</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>DESCRIBE_CONFIGS</code></td>
+  <td><code>TOPIC</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>READ</code></td>
+  <td><code>TOPIC</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>WRITE</code></td>
+  <td><code>TOPIC</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Group</h2>
+<table>
+<thead>
+<tr>
+  <th>Operation</th>
+  <th>Resource</th>
+  <th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>DELETE</code></td>
+  <td><code>GROUP</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>DESCRIBE</code></td>
+  <td><code>GROUP</code></td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>READ</code></td>
+  <td><code>GROUP</code></td>
+</tr>
+</tbody>
+</table>
+<h1>Common Configurations</h1>
+<h2>Producer</h2>
+<p>Topic write and describe
+WRITE Transactional_id
+DESCRIBE Transactional_id
+IDEMPTOTENT WRITE Cluster</p>
+<p>Create topic
+create cluster
+describe topic listoffsets
+alter topic create partitions</p>
+<h2>Consumer</h2>
+<p>Topic read and describe</p>
+<p>read topic
+read group</p>
+<p>clusteraction cluster fetch partitions data</p>
+<p>describe group fetch offsets
+describe topic</p>
+<p>describe cluster</p>
+<p>Consumer GRoups
+group groupname read</p>
+<h2>Brokers</h2>
+<h1>References</h1>
+<ul>
+<li>https://docs.confluent.io/platform/current/kafka/authorization.html</li>
+<li>https://docs.confluent.io/platform/current/kafka/authorization.html#operations</li>
+<li>https://kafka.apache.org/documentation/#operations_resources_and_protocols</li>
+<li>https://sonamvermani.medium.com/kafka-acls-b1c42df9a7e2</li>
+<li>https://medium.com/@nzaporozhets/getting-started-with-kafka-acls-14b16bbf83d1 !!</li>
+</ul>
 
 <script>hljs.highlightAll();</script>
 </body>

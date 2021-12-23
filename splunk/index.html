@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,55 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Splunk
+date: 2017-06-21
+tags: [splunk, technical]
+layout: default
+fav: true
+series: splunk</p>
+<hr />
+<h1>Splunk</h1>
+<p>I've been using Splunk for almost 10 years, after first being introduced to it
+as a Security tool while I was working at a major Australian bank. So impressed
+with the product, I joined the company, and have been a Professional Services
+consultant with them ever since.</p>
+<h2>What the Splunk?</h2>
+<p><em>We Make Machine Data Accessible, Usable and Valuable to Everyone</em>
+{: style=&quot;text-align: center&quot;}</p>
+<p>Splunk provides a mechanism for the collection of machine data information and
+events, with a robust storage and analysis engine. Sitting on top of this is
+a web front end that allows rapid exploration and development of dashboards and
+alerts. The whole framework allows easy integration of 
+<a href="https://splunkbase.splunk.com/app/2890/">machine learning</a>, 
+<a href="http://docs.splunk.com/Documentation/Splunk/latest/AdvancedDev/CustomVizDevOverview">custom visualisations</a> and 
+<a href="https://www.splunk.com/en_us/solutions/solution-areas/security-and-fraud/adaptive-response-initiative.html">automated responses</a>.</p>
+<p>We also have the <a href="https://www.co-store.com/splunk">best T-shirts</a> 😉</p>
+<h2>Splunk-related pages on this site</h2>
+<ul>
+{% assign docs = site:docs | reverse docs %}
+{% for page in docs %}{% if page.tags contains "splunk" and page.title != "Splunk"  %}
+<li><a href="{{page.url}}">{{page.title}}</a></li>
+{% endif %}{% endfor %}
+</ul>
+<h2>Splunk Web Resources</h2>
+<ul>
+<li><a href="http://splunk.com">Splunk Homepage</a> -- Splunk Homepage</li>
+<li><a href="https://answers.splunk.com/index.html">Splunk Answers</a> -- Questions and Answers!</li>
+<li><a href="http://splunkbase.splunk.com">SplunkBase</a> -- Thousands of Splunk apps</li>
+<li><a href="http://reddit.com/r/splunk">/r/Splunk</a> -- Splunk's home on reddit</li>
+<li><a href="http://gosplunk.com/">GoSplunk</a> -- Popular Splunk Queries</li>
+<li><a href="http://www.bbosearch.com/">Big Book Of Splunk</a> -- Even more Splunk Queries</li>
+<li><a href="https://splunk-sizing.appspot.com/">Splunk Sizing Calculator</a> -- Splunk Sizing Calculator for <code>indexes.conf</code></li>
+</ul>
+<h2>Splunk Blogs &amp; Repositories</h2>
+<ul>
+<li><a href="https://www.splunk.com/blog/">Splunk Blogs</a> -- Official Splunk Blog Posts</li>
+<li><a href="http://www.rfaircloth.com/">Ryan Faircloth</a></li>
+<li><a href="http://anthonygtellez.github.io/">Anthony Tellez</a></li>
+<li><a href="http://www.duanewaddle.com/">Duane Waddle</a></li>
+<li><a href="https://github.com/hire-vladimir/">Vladimir's GitHub</a></li>
+<li><a href="https://www.davidveuve.com/tech/">David Veuve</a></li>
+</ul>
 
 <script>hljs.highlightAll();</script>
 </body>

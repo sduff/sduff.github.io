@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,47 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Network Connectivity with Python
+layout: default
+tags: [ splunk, code ]
+date: 2017-06-07</p>
+<hr />
+<h1>Using Python for testing network connectivity</h1>
+<p>More and more Linux distributions have stopped shipping with basic networking
+tools such as <code>telnet</code> installed by default. <code>ping</code> is still available
+(sometimes), but to test if a server can communicate with another server on
+a particular port is now a challenge.</p>
+<p>However, I find <code>python</code> is installed more-often-than-not, and ships with
+networking libraries that one can use for connectivity purposes. The following
+snippet checks for connectivity, in this case, HTTPS (443) to <code>google.com</code>.</p>
+<pre><code class="language-python">$ python
+import socket
+socket.socket().connect((&quot;google.com&quot;,443))
+</code></pre>
+<p>Run it, and you'll either get an exception thrown when connectivity fails, or no
+exception for a successful connection.</p>
+<p><strong>N.B.</strong> this won't confirm application firewalls won't block traffic, but as
+a basic connectivity test, this works fine.</p>
+<p>Here is also a snazzy one liner to make a <code>bash</code> function if you need to run
+a large number of checks</p>
+<pre><code class="language-bash">c() { python &lt;&lt;&lt;&quot;import socket; s=socket.socket(); s.settimeout(5); s.connect(('$1',$2)) ; print 'Connection'&quot;; }
+</code></pre>
+<p>And then use it in the following manner.</p>
+<pre><code class="language-bash">$ c google.com 443
+$ c google.com 22
+</code></pre>
+<p>If you're testing an internal network, set the timeout to something lower than
+3 seconds, while if you're testing a WAN or internet server, set it to a higher
+value.</p>
+<h2>Connectivity testing with Splunk's inbuilt Python</h2>
+<p>I normally need to do connectivity tests as part of installing <a href="/splunk">Splunk</a>,
+which usually ships with <code>python</code> (although not with the Universal Forwarder).
+The python interpreter can be accessed from the command line with</p>
+<pre><code class="language-bash">/opt/splunk/bin/splunk cmd python
+</code></pre>
+<p>So the one liner becomes</p>
+<pre><code class="language-bash">c() { /opt/splunk/bin/splunk cmd python &lt;&lt;&lt;&quot;import socket; s=socket.socket(); s.settimeout(5); s.connect(('$1',$2)) ; print 'Connection'&quot;; }
+</code></pre>
 
 <script>hljs.highlightAll();</script>
 </body>

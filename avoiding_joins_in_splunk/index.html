@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,40 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Avoiding Joins in Splunk
+date: 2017-01-01
+tags: []
+published: false
+layout: default
+series: splunk</p>
+<hr />
+<pre><code>index=_internal host=*opsanalytics* NOT host=esplu*opsanalytics* NOT host=*deploy* NOT host=*master*
+   (source=&quot;/ebs_opt/splunk/var/log/splunk/mongod.log&quot; &quot;overcommit_memory&quot;) OR
+   (source=&quot;/ebs_opt/splunk/var/log/splunk/splunkd.log&quot; NOT component=&quot;DispatchManager&quot;
+   (
+      (&quot;My GUID is&quot;) OR
+      (&quot;Linux transparent hugepage support&quot; NOT &quot;enabled=\&quot;never\&quot; defrag=\&quot;never\&quot;&quot;) OR
+      (&quot;ulimit - Limit: user processes&quot; NOT &quot;409600 processes&quot;) OR
+      (&quot;ulimit - Limit: open files&quot; NOT &quot;819200 files&quot;)
+     )
+   ) earliest = -30d
+
+| eval type_of_event = case(
+   sourcetype=&quot;splunkd&quot; AND (like(_raw,&quot;%Linux transparent hugepage support%&quot;)), &quot;thp_time&quot;,
+   sourcetype=&quot;splunkd&quot; AND (like(_raw,&quot;%Limit: user processes%&quot;)), &quot;ulimit_proc_time&quot;,
+   sourcetype=&quot;splunkd&quot; AND (like(_raw,&quot;%Limit: open files%&quot;)), &quot;ulimit_files_time&quot;,
+   sourcetype=&quot;mongod&quot;, &quot;overcommit_time&quot;,
+   sourcetype=&quot;splunkd&quot;, &quot;restart_time&quot;)
+| stats latest(_time) as most_recent_time by type_of_event, host
+| xyseries host type_of_event most_recent_time
+| eval count=if('overcommit_time' &amp;gt; 'restart_time' OR 'thp_time' &amp;gt; 'restart_time' OR 'ulimit_proc_time' &amp;gt; 'restart_time' OR 'ulimit_files_time' &amp;gt; 'restart_time',&quot;1&quot;,&quot;0&quot;)
+| convert ctime(&quot;*_time&quot;) timeformat=&quot;%d/%m/%y %H:%M:%S&quot;
+| rename overcommit_time AS &quot;Overcommit memory warning&quot;
+| rename thp_time AS &quot;THP warning&quot;
+| rename ulimit_proc_time AS &quot;Ulimit User Processes warning&quot;
+| rename ulimit_files_time AS &quot;Ulimit Open Files warning&quot;
+| rename restart_time AS &quot;Splunk restarted&quot;| rename count as flag| sort -flag
+</code></pre>
 
 <script>hljs.highlightAll();</script>
 </body>

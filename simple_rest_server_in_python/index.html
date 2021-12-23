@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,141 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: A simple REST server in Python
+layout: default
+tags: [ code ]
+date: 2017-04-18</p>
+<hr />
+<h1>A simple REST server in Python</h1>
+<p>Using Python's <code>BaseHTTPServer</code>, its easy to build a very simple REST server, very
+handy for prototyping. In no way should this be used in a production
+environment!</p>
+<p>When visiting, via <code>GET</code> a page that doesn't exist, a very simple upload page
+is presented. Revisiting the page will cause that file to be downloaded or
+viewd. You need to manually (eg, using CURL) <code>POST</code> to the same page to upload
+a new file to the same endpoint.</p>
+<p>All data is stored in memory, and is deleted when the process stops. Like I
+said, its not for production!  If you want some default or consistent data
+present whenever you start the server, you can include it in the <code>endpoints</code>
+definition in <code>main</code>.</p>
+<p>The reason for the large number of headers is to handle
+<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>. The
+settings in the file make the REST endpoint fairly accessible from anywhere.</p>
+<pre><code class="language-python">#!/usr/bin/env python
+
+# Basic REST Server for prototyping
+
+import sys, cgi, BaseHTTPServer, mimetypes
+
+# Port to listen on
+PORT = 1024
+
+# List of endpoints
+class endpoint:
+    mimetype = &quot;&quot;
+    content = &quot;&quot;
+    def __init__(self,mimetype,content):
+        self.mimetype = mimetype
+        self.content = content
+
+endpoints = {}
+
+# The REST handler
+class REST(BaseHTTPServer.BaseHTTPRequestHandler):
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;)
+        self.send_header(&quot;Access-Control-Allow-Methods&quot;,&quot;*&quot;)
+        self.send_header(&quot;Access-Control-Allow-Headers&quot;,&quot;*&quot;)
+        self.end_headers()
+
+    def do_HEAD(self):
+        self.send_response(200)
+        self.send_header(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;)
+        self.send_header(&quot;Access-Control-Allow-Methods&quot;,&quot;*&quot;)
+        self.send_header(&quot;Access-Control-Allow-Headers&quot;,&quot;*&quot;)
+        self.end_headers()
+
+    def do_GET(self):
+        self.path = self.path.split(&quot;?&quot;,1)[0]
+        if self.path in endpoints:
+            ep = endpoints[self.path]
+            self.send_response(200)
+            self.send_header(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Methods&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Headers&quot;,&quot;*&quot;)
+            self.send_header(&quot;Content-Type&quot;, ep.mimetype)
+            self.end_headers()
+            self.wfile.write(ep.content)
+
+        else:
+            self.send_response(200)
+            self.send_header(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Methods&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Headers&quot;,&quot;*&quot;)
+            self.send_header(&quot;Content-Type&quot;, &quot;text/html&quot;)
+            self.end_headers()
+            self.wfile.write(&quot;&quot;&quot;&lt;html&gt;
+&lt;body&gt;
+&lt;form method=&quot;post&quot; enctype=&quot;multipart/form-data&quot; action=&quot;&quot;&quot;)
+            self.wfile.write('&quot;'+self.path+'&quot;')
+            self.wfile.write(&quot;&quot;&quot;&gt;
+&lt;input type=&quot;file&quot; name=&quot;upload&quot;/&gt;&lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;&quot;&quot;&quot;)
+
+    def do_POST(self):
+        self.path = self.path.split(&quot;?&quot;,1)[0]
+        try:
+            ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
+            form = cgi.FieldStorage( fp=self.rfile, headers=self.headers, environ={'REQUEST_METHOD':'POST', 'CONTENT_TYPE':self.headers['Content-Type'], })
+            content = form['upload'].file.read()
+            filename = form['upload'].filename
+
+            mt = mimetypes.guess_type(form[&quot;upload&quot;].filename)[0] or &quot;application/octet-stream&quot;
+            endpoints[self.path] = endpoint(mt,content)
+
+            self.send_response(200)
+            self.send_header(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Methods&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Headers&quot;,&quot;*&quot;)
+            self.send_header(&quot;Content-Type&quot;,mt)
+            self.end_headers()
+            self.wfile.write(content)
+        except Exception as e:
+            print sys.exc_info()
+            self.send_response(500)
+            self.send_header(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Methods&quot;,&quot;*&quot;)
+            self.send_header(&quot;Access-Control-Allow-Headers&quot;,&quot;*&quot;)
+            self.end_headers()
+            self.wfile.write(e)
+
+
+if __name__ == '__main__':
+
+    endpoints = {   &quot;/&quot;: endpoint(&quot;text/plain&quot;,&quot;Hello world!&quot;),
+            &quot;/bye.html&quot;: endpoint(&quot;text/html&quot;,&quot;&lt;html&gt;&lt;body&gt;Bye&lt;/body&gt;&lt;/html&gt;&quot;) 
+    }
+
+    print repr(endpoints)
+
+    httpd = BaseHTTPServer.HTTPServer((&quot;&quot;,PORT), REST)
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    httpd.server_close()
+</code></pre>
+<p>We can use <code>curl</code> for testing:</p>
+<pre><code class="language-bash">$ curl -F &quot;upload=@./simon_duff.html&quot; localhost:1024/owner
+</code></pre>
+<h3>References</h3>
+<ul>
+<li><a href="https://www.spock.li/tutorials/rest-api">https://www.spock.li/tutorials/rest-api</a></li>
+</ul>
 
 <script>hljs.highlightAll();</script>
 </body>

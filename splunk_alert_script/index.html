@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,69 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Splunk Alert Script Template
+date: 2017-07-17
+tags: [splunk, python]
+published: true
+layout: default
+series: splunk</p>
+<hr />
+<h1>Splunk Alert Script</h1>
+<p>A <a href="/splunk">Splunk</a> alert is a search that is periodically run, and if there are any
+results, an <em>alert action</em> can be run. This is a custom script that can be used
+to iterate over the search results and perform a task with the found fields.
+This process is <a href="https://docs.splunk.com/Documentation/Splunk/latest/Alert/Configuringscriptedalerts">documented</a>, but the key takeaways are summarised on this page.</p>
+<h2>Alert Script Arguments</h2>
+<p>When Splunk fires an alert action, there are several arguments that are passed
+to the script. I usually ignore all of them, except for <em>argument 8</em>, which
+contains a <code>gzip</code> <code>CSV</code> file containing the search results. The process is
+usually to open this file and iterate over the results.</p>
+<p>|-----+----------------------+-------|
+| Arg | Environment Variable | Value |
+| :-: | :------------------: | :---: |
+| 0   |	SPLUNK_ARG_0 | Script name |
+| 1	  | SPLUNK_ARG_1 | Number of events returned |
+| 2   |	SPLUNK_ARG_2 | Search terms |
+| 3   |	SPLUNK_ARG_3 | Fully qualified query string |
+| 4   |	SPLUNK_ARG_4 | Name of report |
+| 5   |	SPLUNK_ARG_5 | Trigger reason For example, <em>&quot;The number of events was greater than 1.&quot;</em> |
+| 6   |	SPLUNK_ARG_6 | Browser URL to view the report. |
+| 7   |	SPLUNK_ARG_7 | Not used for historical reasons. |
+| 8   |	SPLUNK_ARG_8 | File in which the results for the search are stored.  Contains raw results in gzip file format. |
+|-----+----------------------+-------|</p>
+<h2>Alert Script Code</h2>
+<p>The following template should be placed in the <code>$SPLUNK_HOME/bin/scripts/</code>
+directory.</p>
+<pre><code class="language-python">import gzip
+import csv
+
+def openany(p):
+    if p.endswith(&quot;.gz&quot;):
+    	return gzip.open(p)
+    else:
+    	return open(p)
+
+results = sys.argv[8]
+for row in csv.DictReader(openany(results)):
+    # do something with row[&quot;field&quot;]
+</code></pre>
+<p>This command can then be selected as a <code>Trigger Action</code> when saving or modifying
+an alert.</p>
+<p><img src="/img/splunk_alert_action.png" alt="Splunk save as alert" title="Splunk save as alert" /></p>
+<h2>Advanced Alert Actions</h2>
+<p>The aforementioned script has actually been deprecated in preference of <a href="http://docs.splunk.com/Documentation/Splunk/6.4.2/AdvancedDev/ModAlertsIntro">Modular
+Alerts</a>. These provide much more customisation features, but I often find this overkill.</p>
+<p>Splunk also initiated the <a href="https://www.splunk.com/en_us/solutions/solution-areas/security-and-fraud/adaptive-response-initiative.html">Adaptive Response Initiative</a> which allows for Splunk to integrate with other (mainly security related) 3rd party products, and allows for bidirectional communication between them. This is a great source for ideas for alert actions.</p>
+<h2>Alert Script ideas</h2>
+<ul>
+<li>Ticket Systems (<em>raise a ticket</em>)</li>
+<li>EMail (<em>send an email</em>)</li>
+<li>Anti Virus (<em>start a scan on a particular machine</em>)</li>
+<li>Firewall Rules (<em>isolate a compromised machine</em>)</li>
+<li>IOT devices (<em>think physical traffic lights, flags and sirens</em>)</li>
+<li>Enrichment (<em>Google a search query, write the results to a file which is indexed by Splunk</em>)</li>
+<li>Expect script (<em>ssh to a server and restart a hung process</em>)</li>
+</ul>
 
 <script>hljs.highlightAll();</script>
 </body>

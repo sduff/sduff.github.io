@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,107 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Visualising Service Status with Emoji
+layout: default
+tags: [ splunk, viz ]
+date: 2018-11-09
+no_ads: true</p>
+<hr />
+<h1>Visualising Service Status with Emoji</h1>
+<p>Splunk dashboards can host a variety of different visualisation types, from
+maps and charts to 3D globes. Its also possible to use something as simple as
+Emoji.  Inspired by <a href="https://splunkbase.splunk.com/app/4273/">this app</a>, I
+propose the use of the following mapping of severity to emoji.</p>
+<p><a href="https://www.splunk.com/en_us/software/it-service-intelligence.html">Splunk
+ITSI</a> is a
+service monitoring tool that can intelligently assign severities to services
+based on underlying infrastructure or application issues. There are also many
+other severity and status categorisations, as listed in the references on this
+page.</p>
+<table>
+<thead>
+<tr>
+  <th>Severity</th>
+  <th style="text-align:center">Recommended Emoji</th>
+  <th>Other Applicable Emoji</th>
+  <th>Reason for Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Critical</td>
+  <td style="text-align:center">💀</td>
+  <td>☠️ 😡🤬🔥💩❌🛑⛔️📛🚫</td>
+  <td>Significantly different than all other recommended emoji</td>
+</tr>
+<tr>
+  <td>High</td>
+  <td style="text-align:center">😵</td>
+  <td>😳🤪😠😠😷🤒🤕🤢🤮⚠️😱😤😢😭😦😧😨😩🤯😬😰</td>
+  <td>Open mouth and X'd eyes lead to quick identification</td>
+</tr>
+<tr>
+  <td>Medium</td>
+  <td style="text-align:center">😥</td>
+  <td>😣😮🤐😯😪😫😖😞😟</td>
+  <td>Emoji with sweat and frown</td>
+</tr>
+<tr>
+  <td>Low</td>
+  <td style="text-align:center">🤔</td>
+  <td>🤨🤨😐😑</td>
+  <td>Emoji with hand and straight mouth</td>
+</tr>
+<tr>
+  <td>Normal</td>
+  <td style="text-align:center">😃</td>
+  <td>😁😀😄😉😊😋🙂😎👍</td>
+  <td>Big eyes and big smile</td>
+</tr>
+<tr>
+  <td>Maintenance</td>
+  <td style="text-align:center">🔨</td>
+  <td>🤞🔧⚒ 🛠⛏</td>
+  <td>Hammer is significantly different</td>
+</tr>
+<tr>
+  <td>Informational</td>
+  <td style="text-align:center">ℹ️</td>
+  <td>🧐 🤓</td>
+  <td>They made an emoji specifically for <em>Information</em>, let's use it</td>
+</tr>
+</tbody>
+</table>
+<h2>Using Emoji in your Splunk query</h2>
+<p><code>| rangemap field=load 💀=90-100 😵=80-89 😥=70-79 🤔=50-69 😃=0-49</code></p>
+<h2>Example dashboard</h2>
+<pre><code>&lt;dashboard&gt;
+  &lt;label&gt;Emoji-Monitor&lt;/label&gt;
+  &lt;row&gt;
+    &lt;panel&gt;
+      &lt;single&gt;
+        &lt;search&gt;
+          &lt;query&gt;
+| makeresults | eval load=random()%100
+| rangemap field=load 💀=90-100 😵=80-89 😥=70-79 🤔=50-69 😃=0-49 default=🔨
+| fields range
+          &lt;/query&gt;
+          &lt;refresh&gt;1s&lt;/refresh&gt;
+        &lt;/search&gt;
+        &lt;option name=&quot;underLabel&quot;&gt;indexer01&lt;/option&gt;
+      &lt;/single&gt;
+    &lt;/panel&gt;
+  &lt;/row&gt;
+&lt;/dashboard&gt;
+</code></pre>
+<p><img src="/img/emoji-monitoring.gif" alt="Emoji Monitoring Splunk Dashboard" /></p>
+<h2>References</h2>
+<ul>
+<li><a href="https://help.statuspage.io/knowledge_base/topics/overview-1">StatusPage.io</a></li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSSHTQ_7.4.0/com.ibm.netcool_OMNIbus.doc_7.4.0/omnibus/wip/user/concept/omn_usr_el_eventseveritylevels.html">NetCool</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Syslog#Severity_level">Syslog Event Severity</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Java_logging_framework#Severity_level">Java Logging Framework/Apache Commons</a></li>
+</ul>
 
 <script>hljs.highlightAll();</script>
 </body>

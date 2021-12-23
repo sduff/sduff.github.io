@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,65 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Colophon
+layout: default
+tags: [ website ]
+date: 2017-09-21
+series: website</p>
+<hr />
+<h1>Colophon</h1>
+<p><em>How does this marvelous web site work?</em>
+{: style=&quot;text-align: center&quot;}</p>
+<h2>Site Generation and Hosting</h2>
+<p>This website it hosted on <a href="http://pages.github.com">GitHub Pages</a> , which
+integrates Jekyll, a static site generator.  You can find the source for the
+site at <a href="http://github.com/sduff/sduff.github.io">http://github.com/sduff/sduff.github.io</a>.</p>
+<p>Previously, I had written a custom site generator, called <em>WASTE</em>, but found I was
+spending more time working on it than I did writing content for the site.
+I abandoned it, but the <a href="http://github.com/sduff/waste">WASTE sources</a> are
+available, should you wish to see some hacked-together python code.</p>
+<h2>Theme</h2>
+<p>I've slightly modified an existing Jekyll theme called
+<a href="https://github.com/sduff/pixyll">Pixyll</a> as I wasn't happy with the
+readability of my homemade CSS.</p>
+<p>For code highlighting, I <a href="https://github.com/sduff/lucario">forked</a> a popular
+text editor theme called <a href="https://github.com/raphamorim/lucario">Lucario</a>. This
+is the same theme I use for my <a href="https://github.com/sduff/dotfiles">vimrc and
+terminal</a>.</p>
+<h2>Build</h2>
+<p>One particular aspect of this website is its connection to <a href="https://travis-ci.org/">Travis-CI</a>,
+a continuous integration system. When I push new content to GitHub, Travis will
+automatically attempt to build the site and verify any URLs are present and
+correct. I'll be emailed the results of the build, on success or failure. I can
+also include an icon on this page showing the build status.</p>
+<p><a href="https://travis-ci.org/sduff/sduff.github.io"><img src="https://travis-ci.org/sduff/sduff.github.io.svg?branch=master" alt="Build Status" /></a>
+{: style=&quot;text-align: center&quot;}</p>
+<h3>Sitemap pings</h3>
+<p><a href="http://github.com/sduff/waste">WASTE</a>, my homemade site generator, could
+atomically ping Google and Microsoft Bing to alert them that a new version of
+the site was available. There are actually several locations where we can hook
+into the GitHub and Travis build process to perform the same tasks. These
+mechanisms will be documented at a later stage.</p>
+<h2>Analytics</h2>
+<p>I like data, and the site access logs are tracked using <a href="http://analytics.google.com">Google
+Analytics</a>. Its probably overkill for my
+requirements, which is just to reassure myself that someone is actually getting
+value from my writing.</p>
+<h2>Affiliate Links</h2>
+<p>This site may have some affiliate links, which means that when you click on a
+link that I suggest, it may result in a commission for me. I'll only link to
+items I actually use or support, and the possibility of a commission doesn't
+sway my opinion of the product.</p>
+<p>Seriously, we're probably talking a few cents here.</p>
+<h2>Disclaimer</h2>
+<p>The postings on this site are my own and do not represent the 
+position or opinions of my employer or its affiliates.</p>
+<p>All data and information provided on this site is for informational purposes
+only. I make no representations as to accuracy, completeness, currentness,
+suitability, or validity of any information on this site and will not be liable
+for any errors, omissions, or delays in this information or any losses,
+injuries, or damages arising from its display or use. All information is
+provided on an as-is basis.</p>
 
 <script>hljs.highlightAll();</script>
 </body>

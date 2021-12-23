@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,74 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Restricting the Splunk Time Range Picker
+date: 2017-07-06
+tags: [splunk, ui]
+published: true
+layout: default
+series: splunk</p>
+<hr />
+<h1>Restricting the Splunk Time Range Picker</h1>
+<p>The <a href="/splunk">Splunk</a> time range picker is a convinient widget for selecting froma
+variety of different timeframes for a search.</p>
+<p><img src="/img/splunk_time_range_picker_default.png" alt="Default Splunk time range picker" title="Default Splunk time range picker" /></p>
+<p>There are several ways that this timepicker can be customised, but they are
+rather heavy-handed, in that they affect the whole app or system to which they
+are applied.  As mentioned in the
+<a href="http://docs.splunk.com/Documentation/Splunk/latest/Search/Selecttimerangestoapply">documentation</a>,
+the list of Preset time ranges can be modified via editing the <code>times.conf</code>
+file, either via the CLI or through the WebGUI, at 
+<code>Settings &gt; User Interface &gt; Time Ranges</code>.
+The other sections of the time range picker cannot be modified in this way however.</p>
+<h2>Using CSS to hide time range picker elements</h2>
+<p>An alternative to this approach is to use CSS to hide the time range picker
+elements that should not be available. A CSS file located in
+<code>&lt;app&gt;/appserver/static/</code> can be included in a custom dashboard or form with the
+line <code>&lt;form stylesheet=&quot;filter.css&quot;&gt;</code>.</p>
+<p>The following CSS provides a template for identifying and filtering the sections
+and presets that are available by default.</p>
+<pre><code class="language-css">/* Hide whole sections 
+ */
+div[id^='presets_view'],
+div[id^='relative_view'],
+div[id^='realtime_view'],
+div[id^='daterange_view'],
+div[id^='dateandtimerange_view'],
+div[id^='advanced_view'] {
+    display: none;
+}
+
+/* Hide individual items 
+ */
+a[data-earliest=&quot;@d&quot;][data-latest=&quot;now&quot;], /* Today */
+a[data-earliest=&quot;@w0&quot;][data-latest=&quot;now&quot;], /* Week to date */
+a[data-earliest=&quot;@w1&quot;][data-latest=&quot;now&quot;], /* Business week to date */
+a[data-earliest=&quot;@mon&quot;][data-latest=&quot;now&quot;], /* Month to date */
+a[data-earliest=&quot;-1d@d&quot;][data-latest=&quot;@d&quot;], /* Yesterday */
+a[data-earliest=&quot;-7d@w0&quot;][data-latest=&quot;@w0&quot;], /* Previous week */
+a[data-earliest=&quot;-6d@w1&quot;][data-latest=&quot;-1d@w6&quot;], /* Previous business week */
+a[data-earliest=&quot;-1mon@mon&quot;][data-latest=&quot;@mon&quot;], /* Previous month */
+a[data-earliest=&quot;-15m&quot;][data-latest=&quot;now&quot;], /* Last 15 minutes */
+a[data-earliest=&quot;-60m@m&quot;][data-latest=&quot;now&quot;], /* Last 60 minutes */
+a[data-earliest=&quot;-4h@m&quot;][data-latest=&quot;now&quot;], /* Last 4 hours */
+a[data-earliest=&quot;-24h@h&quot;][data-latest=&quot;now&quot;], /* Last 24 hours */
+a[data-earliest=&quot;-7d@h&quot;][data-latest=&quot;now&quot;], /* Last 7 days */
+a[data-earliest=&quot;-30d@d&quot;][data-latest=&quot;now&quot;] { /* Last 30 days */
+    display: none;
+}
+</code></pre>
+<p>The benefit of this approach is that entire sections can be hidden, and this
+restriction can be done on a per-dashboard level, rather than at a per-app
+level.</p>
+<p><img src="/img/splunk_time_range_picker_restricted.png" alt="Restricted Splunk time range picker" title="Restricted Splunk time range picker" /></p>
+<p>The downsides are that this is only works for custom dashboards and forms, and
+that these presets are just  masked -- a crafty user could disable this CSS and
+select these hidden items. However, Splunk provides sufficient restrictions as
+part of its
+<a href="https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles">RBAC</a>
+model to limit users from doing long running or all time searches, if required.</p>
+<p>You can grab an example app that demonstrates this configuration from
+<a href="https://github.com/sduff/restrict_timepicker">https://github.com/sduff/restrict_timepicker</a>.</p>
 
 <script>hljs.highlightAll();</script>
 </body>

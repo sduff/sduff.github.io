@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,121 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Splunk Advanced User Search Restrictions
+date: 2017-06-28
+tags: [splunk]
+published: false</p>
+<hr />
+<h1>Splunk Advanced User Search Restrictions</h1>
+<p>Splunk's role based access control (RBAC) allows for role specific search term
+restrictions to be applied to a user's search. What this means if that a user's
+role has a restriction, such as <code>host=google.com</code>, a  search for <code>host=*</code> or
+a generic <code>*</code> search would return only events where the <code>host</code> field was
+<code>google.com</code>, while a search for <code>host=bing.com</code> would return 0 results.</p>
+<p>screenshot</p>
+<p>The <a href="http://docs.splunk.com/Documentation/Splunk/6.6.0/Security/Addandeditroles#Search_filter_format">search filter
+documentation</a>
+states that this filter can include any of the following search terms:</p>
+<ul>
+<li><code>source=</code></li>
+<li><code>host=</code></li>
+<li><code>index=</code></li>
+<li><code>eventtype=</code></li>
+<li><code>sourcetype=</code></li>
+<li>search fields</li>
+<li>wildcards</li>
+<li>use <code>OR</code> to use multiple terms, or <code>AND</code> to make searches more restrictive</li>
+</ul>
+<p>The search terms cannot include:</p>
+<ul>
+<li>saved searches</li>
+<li>time operators</li>
+<li>regular expressions</li>
+<li>any fields or modifiers Splunk Web can overwrite</li>
+</ul>
+<p>The following is a motivating example of where search filters could be used,
+some limitations</p>
+<h2>Example</h2>
+<p>Consider a global enterprise with multiple departments. There could be
+restrictions around which regions can access what indexes and sourcetypes, as
+well as restrictions stemming from the department.</p>
+<table>
+<thead>
+<tr>
+  <th style="text-align:center">Region</th>
+  <th style="text-align:center">Allowed Indexes</th>
+  <th style="text-align:center">Allowed Sourcetypes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:center">Africa</td>
+  <td style="text-align:center"></td>
+  <td style="text-align:center"></td>
+</tr>
+<tr>
+  <td style="text-align:center">Americas</td>
+  <td style="text-align:center"></td>
+  <td style="text-align:center"></td>
+</tr>
+<tr>
+  <td style="text-align:center">Asia</td>
+  <td style="text-align:center"></td>
+  <td style="text-align:center"></td>
+</tr>
+<tr>
+  <td style="text-align:center">Europe</td>
+  <td style="text-align:center"></td>
+  <td style="text-align:center"></td>
+</tr>
+<tr>
+  <td style="text-align:center">Oceania</td>
+  <td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+  <th style="text-align:center">Department</th>
+  <th style="text-align:center">Allowed Indexes</th>
+  <th style="text-align:center">Allowed Sourcetypes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:center"></td>
+  <td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>The naïve approach to implementing this is to  create a role for each
+region/department pairing, 
+assign a search filter to each
+role.</p>
+<p>There are also some limitations when it comes to search filters operating over
+multiple roles.</p>
+<h2>Solution</h2>
+<p>We utilise a lookup to map splunk roles to search terms</p>
+<pre><code>role, email_domain
+can_delete, @splunk.com
+user, @google.com
+user, @gmail.com
+</code></pre>
+<p>We also create a macro in Splunk to determine all the roles a user belongs to</p>
+<p>If the lookup doesn't have any matches, we assume that the user should not have
+any access. To &quot;short circuit&quot; this Splunk query, we just throw in a ridiculous
+search term that won't match any events.</p>
+<pre><code>index=exchange to=$to$ from=$from$ [ |rest /services/authentication/current-context | fields roles | mvexpand roles | rename roles AS role | lookup role_to_domains role
+| eval sender=&quot;$from$&quot; | eval recipient=&quot;$to$&quot;
+| mvexpand email_domain
+| eval email_domain = &quot;%&quot;+email_domain
+| eval valid_search=if(like(sender,email_domain),1,if(like(recipient,email_domain),1,0))
+| stats sum(valid_search) as valid_search | eval search=if(valid_search&amp;gt;0,&quot;&quot;,&quot;ThisLongStringShouldBeFairlyRandomAndIsNotLikelyToOccurInAnyRealEventThereforeSplunkShouldNotBeAbleToFindAnyMatchingEventsContainingThisStringInAdditionItShouldBeFairlyFastAsTheBloomFilterShouldAlsoIgnoreThis&quot;) | fields search ]
+</code></pre>
+<p>This approach works great for restricting users who are using forms, but won't
+work at all when a user has normal search access to Splunk (as they can simply
+not include the macro when they do a search).</p>
 
 <script>hljs.highlightAll();</script>
 </body>

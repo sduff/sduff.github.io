@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,75 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: Processing Excel XLSX files with Python
+date: 2017-10-09
+tags: [splunk, code]
+published: true
+layout: default</p>
+<hr />
+<h1>Processing Excel XLSX files with Python</h1>
+<p>Using Python's <a href="http://effbot.org/zone/element-index.htm">ElementTree</a> XML
+Parser, its possible to quickly parse data within a Microsoft Excel .XLSX file.</p>
+<p>An .XLSX file consists of a large number of XML files that are compressed into
+a single .ZIP file.  Some Spreadsheets make large use of sharedStrings, where
+are strings that are stored in a separate XML file (<code>sharedStrings.xml</code>) which
+then acts as the source of a lookup for the worksheets. Cells that have a <code>s</code>
+value in the <code>t</code> attribute for a cell contain a sharedString, whose contents
+actually exist in another xml fie in the .XLSX. The following script should
+form the basis of an .XLSX to .CSV convertor.</p>
+<pre><code class="language-python">#!/usr/bin/env python
+
+import xml.etree.ElementTree as ET
+import codecs
+import sys
+import datetime
+
+def excel_date_to_str(d):
+  # excel stores a date as days since 01/01/1900
+  # by adding 6933594 to the excel value, we can use python's date module to format it correctly
+  ret = None
+  try:
+    ret = datetime.date.fromordinal(int(d) + 693594).strftime(&quot;%A, %d %B %Y&quot;)
+  finally:
+    return ret
+
+UTF8Writer = codecs.getwriter('utf8')
+sys.stdout = UTF8Writer(sys.stdout)
+
+x = ET.parse(open(&quot;xl/sharedStrings.xml&quot;))
+sharedStrings = x.getroot()
+
+last_v = None
+last_type = None
+for event, elem in ET.iterparse(&quot;xl/worksheets/sheet1.xml&quot;, events=('start', 'end')):
+  uri, tag = elem.tag.split(&quot;}&quot;)
+
+  if event == &quot;start&quot; and tag == &quot;c&quot;: # start c tag
+      last_v = None
+      if &quot;t&quot; in elem.attrib:
+        last_type = elem.attrib[&quot;t&quot;]
+      else:
+        last_type = None
+
+  elif event == &quot;end&quot; and tag == &quot;c&quot;:   # end c tag
+    if &quot;r&quot; in elem.attrib:
+      rc = elem.attrib[&quot;r&quot;]
+      if last_v != None:
+        print &quot;RC is &quot;, rc, &quot; = &quot;, last_v
+
+  elif event == &quot;start&quot; and tag == &quot;v&quot;: # start v tag
+
+    value = &quot;&quot;.join(elem.itertext())
+    if last_type == &quot;s&quot;:
+      last_v = &quot;&quot;.join(sharedStrings[int(value)].itertext())
+    else:
+      last_v = value, &quot;type is &quot;, last_type, excel_date_to_str(value)
+</code></pre>
+<h2>References</h2>
+<ul>
+<li><a href="http://effbot.org/zone/element-index.htm">ELementTree Overview</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/aa338205(v=office.12).aspx">MS's Office XML Specifications</a></li>
+</ul>
 
 <script>hljs.highlightAll();</script>
 </body>

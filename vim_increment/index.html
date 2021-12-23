@@ -20,7 +20,7 @@
    </style>
 
    <title></title>
-   <meta name="description" content="{description}">
+   <meta name="description" content="">
    <meta name="author" content="Simon Duff" />
 </head>
 <body>
@@ -35,6 +35,105 @@
       <a href="https://discord.gg/hhuuC4w">Discord</a>
    </nav>
 </header>
+<p>title: vim commands for bulk incrementing
+date: 2018-02-24
+tags: [vim]
+published: true
+layout: default</p>
+<hr />
+<h1><code>vim</code> commands for bulk incrementing</h1>
+<p>One common task required as part of Splunk administration was that of managing
+the <code>serverclass.conf</code> file<sup class="footnote-ref" id="fnref-1"><a href="#fn-1">1</a></sup>. This file contains a list of servers
+that belong to a particular class, and all machines of that class receive a
+particular set of configuration files.</p>
+<p>A particularly frequent and some-what annoying task is adding and removing
+servers from each class list. All servers in that list need be prefixed with
+<code>whitelist.</code><em><code>X</code></em>, where <em><code>X</code></em> is a consecutive number beginning at 0. When servers
+are added or removed, potentially many entries require updating, and doing this
+by hand could be error-prone.</p>
+<p>Consider the following stanza; 2 machines have been decommissioned (commented
+out in the file), and 3 new servers added to the end. At this stage, the list
+would be rejected, as the entries do not begin at 0, there are gaps, and there
+are duplicates.</p>
+<pre><code class="language-sh">[serverClass:windowsserver]
+# whitelist.0 = 192.168.0.1 # Decomisioned !
+whitelist.1 = 192.168.0.2
+whitelist.2 = 192.168.0.3
+# whitelist.3 = 192.168.0.4 # Decomisioned !
+whitelist.4 = 192.168.0.5
+whitelist.5 = 192.168.0.6
+whitelist.6 = 192.168.0.7
+whitelist.7 = 192.168.0.8
+whitelist.8 = 192.168.0.9
+whitelist.9 = 192.168.0.10
+whitelist.10 = 192.168.0.11
+whitelist.10 = 192.168.0.12 # New !
+whitelist.10 = 192.168.0.13 # New !
+whitelist.10 = 192.168.0.14 # New !
+</code></pre>
+<p>The following commands will renumber and sort the entries nicely.</p>
+<pre><code class="language-sh">let i=0
+vipoj:'&lt;,'&gt;g/^whitelist.\d\+/s//\='whitelist.'.i/ | let i=i+1
+gv:'&lt;,'&gt;!sort
+</code></pre>
+<pre><code class="language-sh">[serverClass:windowsserver]
+# whitelist.0 = 192.168.0.1 # Decomisioned !
+# whitelist.3 = 192.168.0.4 # Decomisioned !
+whitelist.0 = 192.168.0.2
+whitelist.1 = 192.168.0.3
+whitelist.10 = 192.168.0.13 # New !
+whitelist.11 = 192.168.0.14 # New !
+whitelist.2 = 192.168.0.5
+whitelist.3 = 192.168.0.6
+whitelist.4 = 192.168.0.7
+whitelist.5 = 192.168.0.8
+whitelist.6 = 192.168.0.9
+whitelist.7 = 192.168.0.10
+whitelist.8 = 192.168.0.11
+whitelist.9 = 192.168.0.12 # New !
+</code></pre>
+<h2>Explanation</h2>
+<pre><code class="language-sh">let i=0 {enter}
+</code></pre>
+<p>Create a new variable <code>i</code>, which will be used to count the valid lines.</p>
+<pre><code class="language-sh">vip
+</code></pre>
+<p>Visually select the entire paragraph.</p>
+<pre><code class="language-sh">oj
+</code></pre>
+<p><code>o</code> to move the cursor to the other end of the block (the top), and <code>j</code> to move down once, thus skipping the stanza defining line.</p>
+<pre><code class="language-sh">:
+</code></pre>
+<p>Prepare to enter a command. <code>vim</code> will automatically insert <code>'&lt;,'&gt;</code>, which means to apply the command to the visual selection.</p>
+<pre><code class="language-sh">g/^whitelist.\d\+/
+</code></pre>
+<p>Globally perform a search where the start of the line (<code>^</code>) is followed by <code>whitelist.</code> and at least one number (<code>\d\+</code>). Because we look for <code>whitelist</code> at the begining of the line, the search ignores entries that have been commented out with a hash.</p>
+<pre><code class="language-sh">s//\='whitelist.'.i/
+</code></pre>
+<p>Substitute what is found by that search with <code>whitelist.</code> followed by the value of <code>i</code>.</p>
+<pre><code class="language-sh">| let i=i+1 {enter}
+</code></pre>
+<p>Increment the value of <code>i</code>.</p>
+<pre><code class="language-sh">gv
+</code></pre>
+<p>Repeat the previous visual selection.</p>
+<pre><code class="language-sh">:
+</code></pre>
+<p>Prepare to enter a command. Again, <code>vim</code> will automatically insert <code>'&lt;,'&gt;</code>.</p>
+<pre><code class="language-sh">:!sort {enter}
+</code></pre>
+<p>Sort the results.</p>
+<h4>Know a better sort? Please let me know!</h4>
+<h2>References</h2>
+<ul>
+<li><a href="http://vim.wikia.com/wiki/Power_of_g">Power of G: vim wiki</a></li>
+<li><a href="http://vim.wikia.com/wiki/Making_a_list_of_numbers#Substitute_with_ascending_numbers">Making a list of numbers: vim wiki</a></li>
+</ul>
+<section class="footnotes">
+<ol>
+<li id="fn-1"><p>There's now a nice GUI for managing this file, but nothing beats getting your hands dirty and editing by hand!<a href="#fnref-1" class="footnote">&#8617;</a></p></li>
+</ol>
+</section>
 
 <script>hljs.highlightAll();</script>
 </body>
